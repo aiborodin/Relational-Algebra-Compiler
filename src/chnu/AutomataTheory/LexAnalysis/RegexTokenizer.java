@@ -1,4 +1,4 @@
-package chnu.AutomataTheory;
+package chnu.AutomataTheory.LexAnalysis;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -59,31 +59,6 @@ public class RegexTokenizer implements Enumeration<Token> {
         return new Token(content.substring(start, end), tokenType, start);
     }
 
-    public enum REALTokenType implements ITokenType {
-        KEYWORD("\\b(?:select|from|where|group|by|order|or|and|not|exists|having|join|left|right|inner|on|minus|intersect|union|" +
-                "BeginRA|EndRA|create|alter|table|add|integer|real|text)\\b"),
-        ID("[A-Za-z][A-Za-z0-9]*"),
-        REAL_NUMBER("[0-9]+\\.[0-9]*"),
-        NUMBER("[0-9]+"),
-        STRING("(?<br>['\"])((?!\\k<br>).)*\\k<br>"),
-        SPACE("\\s+"),
-        COMMENT("\\-\\-[^\\n\\r]*"),
-        OPERATION("[+\\-\\*/.=\\(\\)]|:="),
-        DELIMITER("[;,]"),
-        REL_OPERATOR("[<>]|<=|>=|<>|==|&|\\|\\|");
-
-        private final String regex;
-
-        REALTokenType(String regex) {
-            this.regex = regex;
-        }
-
-        @Override
-        public String getRegex() {
-            return regex;
-        }
-    }
-
     public static void main(String[] args) {
         String input = new Scanner(System.in).nextLine();
         RegexTokenizer tokenizer = new RegexTokenizer(input, REALTokenType.values());
@@ -113,36 +88,4 @@ public class RegexTokenizer implements Enumeration<Token> {
             lexPosition++;
         }
     }
-}
-
-
-class Token {
-
-    private final String text;
-
-    private final ITokenType type;
-
-    private final int start;
-
-    public Token(String text, ITokenType type, int start) {
-        this.text = text;
-        this.type = type;
-        this.start = start;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public ITokenType getType() {
-        return type;
-    }
-
-    public int getStart() {
-        return start;
-    }
-}
-
-interface ITokenType {
-    String getRegex();
 }
