@@ -7,7 +7,6 @@ import chnu.AutomataTheory.LexAnalysis.Token;
 import chnu.AutomataTheory.SyntAnalysis.relational_algebra_grammar.REALTokenType;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -63,7 +62,7 @@ public class LL_Parser {
                 new Production(BooleanTerm2, Arrays.asList(OR, BooleanTerm, BooleanTerm2)),
                 new Production(BooleanTerm2, Arrays.asList()),
                 new Production(BooleanTerm, Arrays.asList(BooleanFactor, BooleanFactor2)),
-                new Production(BooleanFactor2, Arrays.asList(AND, BooleanFactor, BooleanFactor2)),
+                new Production(BooleanFactor2, Arrays.asList(AND, BooleanFactor, BooleanFactor2)), // 31
                 new Production(BooleanFactor2, Arrays.asList()),
                 new Production(BooleanFactor, Arrays.asList(Predicate)),
                 new Production(BooleanFactor, Arrays.asList(LEFT_BRACE, Condition, RIGHT_BRACE)), // 34

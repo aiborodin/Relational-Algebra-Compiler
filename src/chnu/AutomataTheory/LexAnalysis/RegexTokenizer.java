@@ -59,33 +59,4 @@ public class RegexTokenizer implements Enumeration<Token> {
         return new Token(content.substring(start, end), tokenType, start);
     }
 
-    public static void main(String[] args) {
-        String input = new Scanner(System.in).nextLine();
-        RegexTokenizer tokenizer = new RegexTokenizer(input, REALTokenType.values());
-        System.out.printf("%-15s %-20s %-10s %-10s %-10s %n", "Token", "Lexeme", "Start", "Length", "Position");
-        Token token;
-        ITokenType tokenType;
-        String lexeme;
-        int lexStart = 1, lexPosition = 1;
-        Map<String, Integer> positionTracker = new HashMap<>();
-        while(tokenizer.hasMoreElements()) {
-            token = tokenizer.nextElement();
-            tokenType = token.getType();
-            lexeme = token.getText();
-            if(tokenType == REALTokenType.SPACE || tokenType == REALTokenType.COMMENT || tokenType == REALTokenType.DELIMITER || tokenType == REALTokenType.OPERATION) {
-                if (tokenType == REALTokenType.DELIMITER || tokenType == REALTokenType.OPERATION) {
-                    lexStart += lexeme.length();
-                }
-                continue;
-            }
-            if (positionTracker.containsKey(lexeme)) {
-                System.out.printf("%-15s %-20s %-10s %-10s %-10s %n", token.getType(), lexeme, lexStart, lexeme.length(), positionTracker.get(lexeme));
-            } else {
-                System.out.printf("%-15s %-20s %-10s %-10s %-10s %n", token.getType(), lexeme, lexStart, lexeme.length(), lexPosition);
-                positionTracker.put(lexeme, lexPosition);
-            }
-            lexStart += lexeme.length();
-            lexPosition++;
-        }
-    }
 }
