@@ -1,6 +1,6 @@
 package chnu.AutomataTheory.LexAnalysis;
 
-public enum REALTokenType implements ITokenType {
+public enum SQLTokenType implements ITokenType {
     KEYWORD("\\b(?:select|from|where|group|by|order|or|and|not|exists|having|join|left|right|inner|on|minus|intersect|union|" +
             "BeginRA|EndRA|create|alter|table|add|integer|real|text)\\b"),
     ID("[A-Za-z][A-Za-z0-9]*"),
@@ -15,7 +15,7 @@ public enum REALTokenType implements ITokenType {
 
     private final String regex;
 
-    REALTokenType(String regex) {
+    SQLTokenType(String regex) {
         this.regex = regex;
     }
 

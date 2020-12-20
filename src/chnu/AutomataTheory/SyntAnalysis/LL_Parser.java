@@ -2,6 +2,7 @@ package chnu.AutomataTheory.SyntAnalysis;
 
 import chnu.AutomataTheory.LexAnalysis.ITokenType;
 import chnu.AutomataTheory.LexAnalysis.RegexTokenizer;
+import chnu.AutomataTheory.LexAnalysis.SymbolTable;
 import chnu.AutomataTheory.LexAnalysis.Token;
 
 import chnu.AutomataTheory.SyntAnalysis.relational_algebra_grammar.REALTokenType;
@@ -15,6 +16,8 @@ import static chnu.AutomataTheory.SyntAnalysis.relational_algebra_grammar.REALTo
 
 // Parser implementation for context-free LL(1) grammars
 public class LL_Parser {
+
+    private RegexTokenizer tokenizer;
 
     private final Map<NonTerminal, Map<ITokenType, Production>> parsingTable;
 
@@ -277,10 +280,9 @@ public class LL_Parser {
     }
 
     public boolean parse(String input) {
-        RegexTokenizer tokenizer;
         Token token;
         try {
-            tokenizer = new RegexTokenizer(input + "$", tokenTypes);
+            this.tokenizer = new RegexTokenizer(input + "$", tokenTypes);
             token = tokenizer.nextElement();
         } catch (IllegalStateException ex) {
             System.err.println(ex.getMessage());
@@ -292,11 +294,11 @@ public class LL_Parser {
         symbolStack.push(start); // <ProgramRA>
 
         String displayedInput = input + "$";
-        System.out.printf("%-100s %-40s %n", "Stack", "Input");
+        //System.out.printf("%-100s %-40s %n", "Stack", "Input");
 
         while (!symbolStack.isEmpty()) {
             // Console output
-            printStack(symbolStack, token, displayedInput);
+            //printStack(symbolStack, token, displayedInput);
             // If symbol on the top is terminal (ITokenType)
             if (symbolStack.peek() instanceof ITokenType) {
                 // If token type on the top == input token type
@@ -344,7 +346,7 @@ public class LL_Parser {
                     stackString.append("ID");
                 } else if (symbol == REL_OP || symbol == NUMBER ||
                         symbol == NULL || symbol == AND || symbol == OR || symbol == LEFT_JOIN ||
-                        symbol == ON || symbol == MINUS) {
+                        symbol == ON || symbol == MINUS || symbol == STRING){
                     stackString.append(token.getText());
                 }
                 else {
@@ -366,5 +368,9 @@ public class LL_Parser {
         } else {
             System.err.println("Parsing failed.");
         }
+    }
+
+    public SymbolTable getSymbolTable() {
+        return tokenizer.getSymbolTable();
     }
 }

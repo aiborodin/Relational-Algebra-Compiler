@@ -28,7 +28,7 @@ public enum REALTokenType implements ITokenType {
     EQUALS("="),
     ASSIGN(":="),
     OPERATION("[+\\-\\*/]"),
-    ID("[A-Za-z][A-Za-z0-9]*"),
+    ID("[A-Za-z][A-Za-z0-9_]*"),
     EOS("\\$");
 
     private final String regex;

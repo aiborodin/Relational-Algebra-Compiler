@@ -1,5 +1,7 @@
 package chnu.AutomataTheory.LexAnalysis;
 
+import chnu.AutomataTheory.SyntAnalysis.relational_algebra_grammar.REALTokenType;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,9 +16,12 @@ public class RegexTokenizer implements Enumeration<Token> {
 
     private int currentPosition = 0;
 
+    private final SymbolTable symbolTable;
+
     public RegexTokenizer(String content, ITokenType[] tokenTypes) {
         this.content = content;
         this.tokenTypes = tokenTypes;
+        this.symbolTable = new SymbolTable();
 
         List<String> regexList = new ArrayList<>();
         for (int i = 0; i < tokenTypes.length; i++) {
@@ -56,7 +61,14 @@ public class RegexTokenizer implements Enumeration<Token> {
     }
 
     protected Token createToken(String content, ITokenType tokenType, int start, int end) {
-        return new Token(content.substring(start, end), tokenType, start);
+        Token token = new Token(content.substring(start, end), tokenType, start);
+        if (tokenType != REALTokenType.SPACE && tokenType != REALTokenType.COMMENT) {
+            symbolTable.addToken(token);
+        }
+        return token;
     }
 
+    public SymbolTable getSymbolTable() {
+        return symbolTable;
+    }
 }
