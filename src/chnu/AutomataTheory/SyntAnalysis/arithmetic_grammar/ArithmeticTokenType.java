@@ -1,4 +1,4 @@
-package chnu.AutomataTheory.SyntAnalysis;
+package chnu.AutomataTheory.SyntAnalysis.arithmetic_grammar;
 
 import chnu.AutomataTheory.LexAnalysis.ITokenType;
 

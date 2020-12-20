@@ -1,5 +1,7 @@
 package chnu.AutomataTheory.SyntAnalysis;
 
+import chnu.AutomataTheory.SyntAnalysis.arithmetic_grammar.ArithmeticNonTerminal;
+
 import java.util.List;
 
 // Context-free grammar production rule
