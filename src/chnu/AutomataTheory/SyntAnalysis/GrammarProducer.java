@@ -15,4 +15,9 @@ public interface GrammarProducer {
 
    NonTerminal getStart();
 
+   ITokenType getEosTokenType();
+
+   ITokenType[] getTokenTypes();
+
+   Map<ITokenType, Integer> getOperatorsPrecedenceMap();
 }

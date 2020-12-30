@@ -6,11 +6,11 @@ import chnu.AutomataTheory.LexAnalysis.ITokenType;
 
 public enum ArithmeticTokenType implements ITokenType {
 
-    ID("a|b|c"),
-    PLUS("\\+"),
-    ASTERISK("\\*"),
-    LEFT_BRACE("\\("),
-    RIGHT_BRACE("\\)"),
+    ID("a|b|c"), // NUMBER("-?([0-9]+\\.[0-9]*|[0-9]+)")
+    PLUS("\\+|-"),
+    ASTERISK("\\*|/"),
+    LEFT_PARENTHESIS("\\("),
+    RIGHT_PARENTHESIS("\\)"),
     EOS("\\$");
 
     private final String regex;

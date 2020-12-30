@@ -92,7 +92,7 @@ public class DataBase {
         String leftType = (String)left.getColumn(leftColumn).getAttribute("type");
         String rightType = (String)right.getColumn(rightColumn).getAttribute("type");
         if (!leftType.equals(rightType)) {
-            return leftTable + "." + leftColumn + "' of type '" + leftType + "' and '" + rightTable + "." + rightColumn + "' of type '" + rightType + "' " +
+            return "'" + leftTable + "." + leftColumn + "' of type '" + leftType + "' and '" + rightTable + "." + rightColumn + "' of type '" + rightType + "' " +
                     "are not compatible types for left join operation.";
         }
         return null;
